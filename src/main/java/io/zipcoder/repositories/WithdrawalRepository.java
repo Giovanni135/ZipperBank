@@ -1,4 +1,4 @@
 package io.zipcoder.repositories;
 
-public class WithdrawalRepository {
+public interface WithdrawalRepository {
 }
