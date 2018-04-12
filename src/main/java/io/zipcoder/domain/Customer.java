@@ -18,6 +18,15 @@ public class Customer {
 
     private Set<Address> address;
 
+    public Customer(String first_name, String last_name, Set<Address> address) {
+        this.first_name = first_name;
+        this.last_name = last_name;
+        this.address = address;
+    }
+
+    public Customer() {
+    }
+
     public Long getId() {
         return id;
     }

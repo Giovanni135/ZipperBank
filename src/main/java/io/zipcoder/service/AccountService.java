@@ -1,18 +1,13 @@
 package io.zipcoder.service;
 
 import io.zipcoder.domain.Account;
-import java.net.URI;
+
 import io.zipcoder.repositories.AccountRepository;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
 import javax.inject.Inject;
-import javax.validation.Valid;
+
 
 
 @Service
@@ -28,32 +23,26 @@ public class AccountService {
     }
 
 
-    public ResponseEntity<?> getAccountById(@PathVariable long id) {
-        Account a = accountRepository.findOne(id);
+    public ResponseEntity<?> getAccountById() {
+        Account a = accountRepository.findOne();
         return new ResponseEntity<>(a, HttpStatus.OK);
+    }
 
-
-    public ResponseEntity<?> createAccount(@Valid @RequestBody Account account){
+    public ResponseEntity<?> createAccount() {
         account = accountRepository.save(account);
-            HttpHeaders httpHeaders = new HttpHeaders();
-            Uri newAccountUri = ServletUriComponentsBuilder
-                    .fromCurrentRequest()
-                    .path("/{id}")
-                    .buildAndExpand(account.getId())
-                    .toUri();
-            httpHeaders.setLocation(newAccountUri);
-            return new ResponseEntity<>(httpHeaders, HttpStatus.OK);
+        return new ResponseEntity<>(account, HttpStatus.CREATED);
     }
 
-    public void updateAccount(Account account){
-
-        this.accountRepository.updateAccount(account);
-    }
-
-
-    public ResponseEntity<?> deleteAccount(@PathVariable long id){
-        accountRepository.removeAccountById(id);
+    public ResponseEntity<?> updateAccount(Account account){
+        accountRepository.updateAccount(account);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+
+    public ResponseEntity<?> deleteAccount(){
+        accountRepository.removeAccountById();
+        return new ResponseEntity<>(HttpStatus.OK);
+        }
+
     }
-}
+

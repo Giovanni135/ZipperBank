@@ -21,6 +21,16 @@ public class Account {
 
     private Customer customer;
 
+    public Account(Enum type, String nickname, Integer rewards, Double balance, Customer customer) {
+        this.type = type;
+        this.nickname = nickname;
+        this.rewards = rewards;
+        this.balance = balance;
+        this.customer = customer;
+    }
+
+    public Account(){}
+
     public Long getId() {
         return id;
     }
