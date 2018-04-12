@@ -1,47 +1,40 @@
 package io.zipcoder.controller;
 
-
 import io.zipcoder.domain.Account;
-import io.zipcoder.repositories.AccountRepository;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
+import io.zipcoder.service.AccountService;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.inject.Inject;
-import javax.validation.Valid;
-import java.net.URI;
 
 @RestController
 public class AccountController {
 
     @Inject
-    private AccountRepository accountRepository;
+    private AccountService accountService;
 
-    @RequestMapping(value = "/accounts", method = RequestMethod.GET)
-    public ResponseEntity<Iterable<Account>> getAllAccounts(){
-        Iterable<Account> allAccounts = accountRepository.findAll();
-        return new ResponseEntity<>(allAccounts, HttpStatus.OK);
+    @RequestMapping(method = RequestMethod.GET)
+    public ResponseEntity<?> getAllAccounts(){
+        return accountService.getAccounts();
+    }
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public ResponseEntity<?> getAccountById(@PathVariable("id") long id){
+        return accountService.getAccountById(id);
     }
 
-    @RequestMapping(value = "/polls", method = RequestMethod.POST)
-    public ResponseEntity<?> createAccount(@Valid @RequestBody Account account){
-        account = accountRepository.save(account);
-        HttpHeaders httpHeaders = new HttpHeaders();
-        URI newAccountUri = ServletUriComponentsBuilder
-                .fromCurrentRequest()
-                .path("/{id}")
-                .buildAndExpand(account.getId())
-                .toUri();
-        httpHeaders.setLocation(newAccountUri);
-        return new ResponseEntity<>(httpHeaders, HttpStatus.CREATED);
+    @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> createAccount(@RequestBody Account account){
+        return accountService.createAccount(account);
     }
 
-    @RequestMapping(value = "/accounts/{accountId}", method = RequestMethod.GET)
-    public ResponseEntity<?> getAccount(@PathVariable Long accountId){
-        Account a = accountRepository.findOne(accountId);
-        return new ResponseEntity<>(a, HttpStatus.OK);
+    @RequestMapping(method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> updateAccountById(@RequestBody Account account){
+        return accountService.updateAccount(account);
     }
 
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    public ResponseEntity<?> deleteAccountById(@PathVariable("id") long id){
+        return accountService.deleteAccount(id);
+    }
 }
