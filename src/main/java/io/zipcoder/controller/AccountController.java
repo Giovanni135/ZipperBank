@@ -10,6 +10,9 @@ import javax.inject.Inject;
 
 @RestController
 public class AccountController {
+<<<<<<< HEAD
+}
+=======
 
     @Inject
     private AccountService accountService;
@@ -38,3 +41,4 @@ public class AccountController {
         return accountService.deleteAccount(id);
     }
 }
+>>>>>>> 4e9143ce651a0fdee8273f51946b5b869c5532ec
