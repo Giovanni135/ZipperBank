@@ -1,16 +1,9 @@
 package io.zipcoder.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 
-@Entity
 public class Deposits {
 
-    @Id
-    @GeneratedValue
     private long id;
-
     private String type;
     private String transaction_date;
     private String status;
@@ -18,19 +11,6 @@ public class Deposits {
     private String medium;
     private double amount;
     private String description;
-
-    public Deposits(String type, String transaction_date, String status, long payer_id, String medium, double amount, String description) {
-        this.type = type;
-        this.transaction_date = transaction_date;
-        this.status = status;
-        this.payer_id = payer_id;
-        this.medium = medium;
-        this.amount = amount;
-        this.description = description;
-    }
-
-    public Deposits() {
-    }
 
     public long getId() {
         return id;
