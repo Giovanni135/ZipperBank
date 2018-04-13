@@ -2,17 +2,17 @@ package io.zipcoder.repositories;
 
 import io.zipcoder.domain.Account;
 import org.springframework.data.repository.CrudRepository;
-import org.springframework.stereotype.Repository;
 
-
-@Repository
 public interface AccountRepository extends CrudRepository<Account, Long> {
+
+    Iterable<Account> findById(long id);
 
     Iterable<Account> findAll();
 
-    void removeAccountById();
+    void removeAccountById(Long id);
 
     void updateAccount(Account account);
 
-    Account findOne();
+    void addAccountToDB(Account account);
+
 }

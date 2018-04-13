@@ -9,6 +9,7 @@ import javax.persistence.Id;
 @Entity
 public class Withdrawal {
 
+
     @Id
     @GeneratedValue
     private long id;
@@ -33,6 +34,7 @@ public class Withdrawal {
 
     public Withdrawal() {
     }
+
 
     public long getId() {
         return id;

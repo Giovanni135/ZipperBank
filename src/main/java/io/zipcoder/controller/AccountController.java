@@ -5,10 +5,14 @@ import io.zipcoder.service.AccountService;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 import javax.inject.Inject;
 
 @RestController
 public class AccountController {
+<<<<<<< HEAD
+}
+=======
 
     @Inject
     private AccountService accountService;
@@ -19,12 +23,12 @@ public class AccountController {
     }
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<?> getAccountById(@PathVariable("id") long id){
-        return accountService.getAccountById();
+        return accountService.getAccountById(id);
     }
 
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> createAccount(@RequestBody Account account){
-        return accountService.createAccount();
+        return accountService.createAccount(account);
     }
 
     @RequestMapping(method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -34,6 +38,7 @@ public class AccountController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<?> deleteAccountById(@PathVariable("id") long id){
-        return accountService.deleteAccount();
+        return accountService.deleteAccount(id);
     }
 }
+>>>>>>> 4e9143ce651a0fdee8273f51946b5b869c5532ec

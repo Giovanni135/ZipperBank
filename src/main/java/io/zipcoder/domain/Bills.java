@@ -13,22 +13,6 @@ public class Bills {
     private Double payment_amount;
     private String account_id;
 
-    public Bills(Long id, String status, String payee, String nickname, String creation_date, String payment_date, Integer recurring_date, String upcoming_payment_date, Double payment_amount, String account_id) {
-        this.id = id;
-        this.status = status;
-        this.payee = payee;
-        this.nickname = nickname;
-        this.creation_date = creation_date;
-        this.payment_date = payment_date;
-        this.recurring_date = recurring_date;
-        this.upcoming_payment_date = upcoming_payment_date;
-        this.payment_amount = payment_amount;
-        this.account_id = account_id;
-    }
-
-    public Bills() {
-    }
-
     public Long getId() {
         return id;
     }
